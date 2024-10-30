@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/s23380409@unn.global/project/vector/Matrix.cpp" "CMakeFiles/main.dir/Matrix.cpp.o" "gcc" "CMakeFiles/main.dir/Matrix.cpp.o.d"
   "/home/s23380409@unn.global/project/vector/main.cpp" "CMakeFiles/main.dir/main.cpp.o" "gcc" "CMakeFiles/main.dir/main.cpp.o.d"
   )
 
