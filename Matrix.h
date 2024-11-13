@@ -3,16 +3,70 @@
 template <class T>
 class Matrix : public Vector<Vector<T>>{
 public:
-    Matrix(size_t n) : Vector<Vector<T>>(n){
-        for (size_t i = 0; i < n; i++){
-            _array[i] = Vector<T>(n - i, i);
+    using Vector<Vector<T>>::operator[];//как другим способом? Конструктор перемешения?
+    // T operator[](int index){
+    //     return this->_array[index];
+    // }
+
+    Matrix(size_t n, bool flag = false) : Vector<Vector<T>>(n){
+        if (flag){
+            for (size_t i = 0; i < n; i++){
+                this->_array[i] = Vector<T>(n, i);
+            }
+        }
+        else{
+            for (size_t i = 0; i < n; i++){
+                this->_array[i] = Vector<T>(n);
+            }
         }
     }
-    Matrix(const Matrix& mt);
-    Matrix(const Vector<Vector<T>>& mt);
-    Matrix& operator=(const Matrix& mt);
-    Matrix operator+(const Matrix& mt);
-    Matrix operator-(const Matrix& mt);
-    Matrix operator*(const Matrix& mt);
+
+    Matrix(const Matrix& mt) : Vector<Vector<T>>(mt){
+
+    }
+
+    Matrix(const Vector<Vector<T>>& mt) : Vector<Vector<T>>(mt){
+
+    }
+
+    Matrix& operator=(const Matrix& mt){
+        return Vector<Vector<T>>::operator=(mt);
+    }
+
+    Matrix operator*(const Matrix& mt){
+        if (this->_size != mt.Getize()){
+            throw "6";
+        }
+        Matrix res = Matrix(this->_size);
+        for (int i = 0; i < this->_size; i++){
+            for (int j = 0; j < this->_size; j++){
+                for (int k = 0; k < this->_size; k++){
+                    int IndexArray = this->_array[i].GetSizeIndex();
+                    int IndexMt = mt._array[k].GetSizeIndex();
+                    if ((IndexArray > k) || (IndexMt > j)){
+                        res[i][j] += 0;
+                        continue;
+                    }
+                    res[i][j] += this->_array[i][k] * mt._array[k][j];
+                }
+            }
+        }
+        return res; 
+    }
+
+    friend std::ostream& operator<<(std::ostream& ostr, Matrix& tmp){
+        for (int i = 0; i < tmp._size; i++){
+            std::cout<<tmp[i];
+        }
+        return ostr;
+    }
+
+    Matrix operator+(const Matrix& mt){
+        return Vector<Vector<T>>::operator+(mt);
+    }
+
+    Matrix operator-(const Matrix& mt){
+        return Vector<Vector<T>>::operator-(mt);
+    }
     
 };
