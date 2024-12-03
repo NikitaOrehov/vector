@@ -30,9 +30,10 @@ public:
         }
     }
 
-    // Vector(Vector&& moved) : _size(moved._size), _startIndex(moved._startIndex) {
-    //     _array = moved._array;
-    // }
+    Vector(Vector&& moved) : _size(moved._size), _startIndex(moved._startIndex) {
+        _array = moved._array;
+        moved._array = nullptr;
+    }
 
     ~Vector() {
         delete [] _array;

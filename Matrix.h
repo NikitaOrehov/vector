@@ -4,9 +4,6 @@ template <class T>
 class Matrix : public Vector<Vector<T>>{
 public:
     using Vector<Vector<T>>::operator[];//как другим способом? Конструктор перемешения?
-    // T operator[](int index){
-    //     return this->_array[index];
-    // }
 
     Matrix(size_t n, bool flag = false) : Vector<Vector<T>>(n){
         if (flag){
@@ -67,6 +64,22 @@ public:
 
     Matrix operator-(const Matrix& mt){
         return Vector<Vector<T>>::operator-(mt);
+    }
+
+    Matrix Transposition(){
+        Matrix m(this->_size);
+        for (int i = 0; i < this->_size; i++){
+            for (int j = 0; j < this->_size; j++){
+                if (this->_array[j].GetSizeIndex() > i){
+                    m[i][j] = 0;
+                }
+                else{
+                    int a = this->_array[j][i];
+                    m[i][j] = this->_array[j][i];
+                }
+            }
+        }
+        return m;
     }
     
 };

@@ -21,5 +21,7 @@ int main() {
     m2[1][1] = 6;
     std::cout<<m2;
     Matrix<int> m3 = m1 * m2;
-   std::cout<<"\n"<<m3;
+    std::cout<<"\n"<<m3;
+    Matrix<int> m4 = m2.Transposition();
+    std::cout<<"\n"<<m4;
 }
